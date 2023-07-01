@@ -7,7 +7,7 @@ import java.util.Set;
 
 @Slf4j
 public class UnProcessableObject extends RuntimeException {
-    Set<ValidationMessage> validations;
+    private final Set<ValidationMessage> validations;
 
     public UnProcessableObject(Set<ValidationMessage> validations, String message) {
         super(message);
