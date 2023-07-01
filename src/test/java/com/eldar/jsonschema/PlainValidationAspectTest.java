@@ -1,6 +1,6 @@
 package com.eldar.jsonschema;
 
-import com.eldar.jsonschema.exception.UnprocessableObject;
+import com.eldar.jsonschema.exception.UnProcessableObject;
 import com.eldar.jsonschema.validators.ValidatorService;
 import com.eldar.jsonschema.validators.aspect.PlainValidationAspect;
 import com.eldar.jsonschema.validators.annotations.ValidatedMethod;
@@ -46,7 +46,7 @@ class PlainValidationAspectTest {
         ProceedingJoinPoint joinPoint = createJoinPoint(TestClass.class.getMethod(
                 "validaMethodNoNullAndEmptyThrowException", String.class), (String) null);
 
-        assertThrows(UnprocessableObject.class, () -> plainValidationAspect.validateMethod(joinPoint));
+        assertThrows(UnProcessableObject.class, () -> plainValidationAspect.validateMethod(joinPoint));
     }
 
     @Test
@@ -71,7 +71,7 @@ class PlainValidationAspectTest {
         ProceedingJoinPoint joinPoint = createJoinPoint(TestClass.class.getMethod(
                 "validaMethodNoNullAndEmptyThrowException", List.class), (List) null);
 
-        assertThrows(UnprocessableObject.class, () -> plainValidationAspect.validateMethod(joinPoint));
+        assertThrows(UnProcessableObject.class, () -> plainValidationAspect.validateMethod(joinPoint));
     }
 
     @Test
@@ -107,7 +107,7 @@ class PlainValidationAspectTest {
         ProceedingJoinPoint joinPoint = createJoinPoint(TestClass.class.getMethod("nonEmptyStringValidationThrows",
                 String.class), (Object) null);
 
-        assertThrows(UnprocessableObject.class, () -> plainValidationAspect.validateParam(joinPoint));
+        assertThrows(UnProcessableObject.class, () -> plainValidationAspect.validateParam(joinPoint));
     }
 
     @Test
@@ -125,7 +125,7 @@ class PlainValidationAspectTest {
         ProceedingJoinPoint joinPoint = createJoinPoint(TestClass.class.getMethod("nonEmptyStringValidationThrows",
                 String.class), "");
 
-        assertThrows(UnprocessableObject.class, () -> plainValidationAspect.validateParam(joinPoint));
+        assertThrows(UnProcessableObject.class, () -> plainValidationAspect.validateParam(joinPoint));
     }
 
     @Test
@@ -152,7 +152,7 @@ class PlainValidationAspectTest {
         ProceedingJoinPoint joinPoint = createJoinPoint(TestClass.class.getMethod("stringMinLengthOf2ValidationThrows"
                         , String.class),
                 "a");
-        assertThrows(UnprocessableObject.class, () -> plainValidationAspect.validateParam(joinPoint));
+        assertThrows(UnProcessableObject.class, () -> plainValidationAspect.validateParam(joinPoint));
 
     }
 

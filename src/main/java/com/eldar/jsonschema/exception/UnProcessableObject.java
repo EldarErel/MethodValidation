@@ -6,10 +6,10 @@ import lombok.extern.slf4j.Slf4j;
 import java.util.Set;
 
 @Slf4j
-public class UnprocessableObject extends RuntimeException {
+public class UnProcessableObject extends RuntimeException {
     Set<ValidationMessage> validations;
 
-    public UnprocessableObject(Set<ValidationMessage> validations, String message) {
+    public UnProcessableObject(Set<ValidationMessage> validations, String message) {
         super(message);
         this.validations = validations;
         log.error(message + validations);

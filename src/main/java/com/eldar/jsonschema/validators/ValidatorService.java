@@ -1,6 +1,6 @@
 package com.eldar.jsonschema.validators;
 
-import com.eldar.jsonschema.exception.UnprocessableObject;
+import com.eldar.jsonschema.exception.UnProcessableObject;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.networknt.schema.*;
@@ -42,7 +42,7 @@ public class ValidatorService {
             return;
         }
 
-        throw new UnprocessableObject(validationResults, "Validation Error: ");
+        throw new UnProcessableObject(validationResults, "Validation Error: ");
     }
 
     private JsonSchema buildSchemaFromString(String schemaAsString) {
