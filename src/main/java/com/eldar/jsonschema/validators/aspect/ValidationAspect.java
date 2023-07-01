@@ -26,7 +26,7 @@ import static com.eldar.jsonschema.ValidationSchema.*;
 @Component
 @EnableAspectJAutoProxy
 @RequiredArgsConstructor
-public class PlainValidationAspect {
+public class ValidationAspect {
 
     private final ValidatorService validatorService;
 

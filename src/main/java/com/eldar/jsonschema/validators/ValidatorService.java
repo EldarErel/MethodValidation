@@ -7,15 +7,17 @@ import com.networknt.schema.*;
 import com.eldar.jsonschema.exception.LoadingFailedException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
+
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Slf4j
 @Service
 public class ValidatorService {
-    private static final ObjectMapper objectMapper = new ObjectMapper();
+    protected static final ObjectMapper objectMapper = new ObjectMapper();
 
-    public static final JsonSchemaFactory FACTORY = JsonSchemaFactory
+    protected static final JsonSchemaFactory FACTORY = JsonSchemaFactory
             .builder(JsonSchemaFactory.getInstance(SpecVersion.VersionFlag.V201909))
             .addMetaSchema(JsonMetaSchema.getV4())
             .addMetaSchema(JsonMetaSchema.getV6())
@@ -30,18 +32,18 @@ public class ValidatorService {
     }
 
     public void validate(String schemaAsString, Object payload) throws JsonSchemaException {
-        log.debug("Validate using schema: {}", schemaAsString);
+        log.debug("Validating using schema: {}", schemaAsString);
 
         JsonSchema schema = buildSchemaFromString(schemaAsString);
         validate(schema, objectMapper.valueToTree(payload));
     }
 
     private void validate(JsonSchema schema, JsonNode payload) {
-        Set<com.networknt.schema.ValidationMessage> validationResults = schema.validate(payload);
-        if (validationResults.isEmpty()) {
+        Set<ValidationMessage> validationResults = schema.validate(payload);
+        if (CollectionUtils.isEmpty(validationResults)) {
             return;
         }
-
+        log.warn("Validation Error: {}", validationResults);
         throw new UnProcessableObject(validationResults, "Validation Error: ");
     }
 
@@ -53,6 +55,7 @@ public class ValidatorService {
                 config.setFailFast(false);
                 return FACTORY.getSchema(schemaAsString, config);
             } catch (Exception e) {
+                log.warn("Failed to load schema: {}", schemaAsString, e);
                 throw new LoadingFailedException("Failed to load schema: " + schemaAsString, e);
             }
         });

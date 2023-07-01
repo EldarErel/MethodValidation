@@ -2,7 +2,7 @@ package com.eldar.jsonschema;
 
 import com.eldar.jsonschema.exception.UnProcessableObject;
 import com.eldar.jsonschema.validators.ValidatorService;
-import com.eldar.jsonschema.validators.aspect.PlainValidationAspect;
+import com.eldar.jsonschema.validators.aspect.ValidationAspect;
 import com.eldar.jsonschema.validators.annotations.ValidatedMethod;
 import com.eldar.jsonschema.validators.annotations.ValidatedParam;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -23,13 +23,13 @@ import java.util.Map;
 import java.util.stream.Stream;
 import static org.junit.jupiter.api.Assertions.*;
 @Tag("unit_test")
-class PlainValidationAspectTest {
-    private static PlainValidationAspect plainValidationAspect;
+class ValidationAspectTest {
+    private static ValidationAspect plainValidationAspect;
 
     @BeforeAll
     static void init() {
         ValidatorService validatorService = new ValidatorService();
-        plainValidationAspect = new PlainValidationAspect(validatorService);
+        plainValidationAspect = new ValidationAspect(validatorService);
     }
 
     @ParameterizedTest
